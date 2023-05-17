@@ -2,9 +2,9 @@ using BS.Core.Services;
 using FluentAssertions;
 using FluentResults.Extensions.FluentAssertions;
 
-namespace BS.IntegrationTest
+namespace BS.IntegrationTest.Tests
 {
-    public class Tests
+    public class BoardServiceTests
     {
         private IBoardService _service;
         private const int InputSize = 10;

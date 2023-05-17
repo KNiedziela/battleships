@@ -1,4 +1,4 @@
-﻿namespace BS.Core.Entities;
+﻿namespace BS.Core.Entities.Ships;
 
 public enum ShipType
 {

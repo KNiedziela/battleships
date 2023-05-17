@@ -1,10 +1,10 @@
-﻿namespace BS.Core.Entities;
+﻿namespace BS.Core.Entities.Ships;
 
-public class Ship
+public abstract class Ship
 {
     public ShipType ShipType { get; set; }
     public Coordinates StartCoordinates { get; set; }
     public Coordinates EndCoordinates { get; set; }
-    public bool IsAlive { get; set; }
-    public List<Coordinates> TakenHits { get; set; } = new();
+    public int HitPoints { get; set; }
+    public bool IsAlive => HitPoints > 0;
 }

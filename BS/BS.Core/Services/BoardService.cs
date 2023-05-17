@@ -5,8 +5,15 @@ namespace BS.Core.Services;
 
 public class BoardService : IBoardService
 {
-    public Result<GameBoard> InitializeBoard()
+    private const int MinimumBoardSize = 5;
+    public Result<GameBoard> InitializeBoard(int size)
     {
-        throw new NotImplementedException();
+        if (size < MinimumBoardSize)
+        {
+            return Result.Fail($"Minimum board size is: {MinimumBoardSize}");
+        }
+        var board = GameBoard.Create(size, size);
+
+        return Result.Ok(board);
     }
 }

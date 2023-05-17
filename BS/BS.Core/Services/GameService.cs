@@ -3,7 +3,7 @@ using FluentResults;
 
 namespace BS.Core.Services;
 
-class GameService : IGameService
+public class GameService : IGameService
 {
     public Result StartGame()
     {

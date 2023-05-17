@@ -5,5 +5,5 @@ namespace BS.Core.Services;
 
 public interface IBoardService
 {
-    public Result<GameBoard> InitializeBoard();
+    public Result<GameBoard> InitializeBoard(int size);
 }

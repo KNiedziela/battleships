@@ -31,5 +31,11 @@ public static class ShipCoordinatesExtensions
         return isIntersecting;
     }
 
+    public static bool CheckIfShipsOverlap(Coordinates existingStartCoords, Coordinates existingEndCoords,
+        Coordinates coord) =>
+        CheckIfShipsOverlap(existingStartCoords, existingEndCoords, coord, coord
+             );
+
+
     public static Point3d ToPoint3D(this Coordinates coord) => new(coord.X, coord.Y, 0);
 }

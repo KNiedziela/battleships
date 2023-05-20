@@ -8,4 +8,6 @@ public abstract class Ship
     public int HitPoints { get; set; }
     public bool IsAlive => HitPoints > 0;
     public int Length => HitPoints;
+
+    public void TakeDamage() => HitPoints--;
 }

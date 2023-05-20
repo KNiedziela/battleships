@@ -1,4 +1,5 @@
 ﻿using BS.Core.Entities.Ships;
+using BS.Core.Helpers;
 using BS.Core.Models;
 using BS.Core.Repositories;
 using FluentResults;
@@ -51,7 +52,11 @@ public class GameplayService : IGameplayService
 
     public Result TakeShot(TakeShootInputModel inputModel)
     {
-        // TODO implement parsing
+        var coordinatesResult = CoordinatesParser.ParseCoordinates(inputModel.TargetField);
+        if (coordinatesResult.IsFailed)
+        {
+            return Result.Fail(coordinatesResult.Errors);
+        }
 
         var boardResult = _boardRepository.GetGameBoard();
         if (boardResult.IsFailed)
@@ -59,8 +64,23 @@ public class GameplayService : IGameplayService
             return Result.Fail(boardResult.Errors);
         }
         var board = boardResult.Value;
+        var wasShootTaken = board.CheckIfShotWasAlreadyTaken(coordinatesResult.Value);
+        if (wasShootTaken)
+        {
+            return Result.Fail("Shot was already taken at current coordinates");
+        }
 
-        // TODO implement take shot
+        var aliveShip = board.GetAliveShips().FirstOrDefault(s => ShipCoordinatesExtensions.CheckIfShipsOverlap(s.StartCoordinates, s.EndCoordinates, coordinatesResult.Value));
+        if (aliveShip is not null)
+        {
+            board.AddShot(coordinatesResult.Value, true);
+            aliveShip.TakeDamage();
+        }
+        else
+        {
+            board.AddShot(coordinatesResult.Value, false);
+
+        }
 
         return Result.Ok();
     }

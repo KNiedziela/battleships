@@ -3,7 +3,7 @@ using FluentResults;
 
 namespace BS.Core.Services;
 
-public class BoardService : IBoardService
+public class BoardGenerationService : IBoardGenerationService
 {
     private const int MinimumBoardSize = 5;
     public Result<GameBoard> InitializeBoard(int size)

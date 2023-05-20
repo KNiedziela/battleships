@@ -7,4 +7,5 @@ public abstract class Ship
     public Coordinates EndCoordinates { get; set; }
     public int HitPoints { get; set; }
     public bool IsAlive => HitPoints > 0;
+    public int Length => HitPoints;
 }

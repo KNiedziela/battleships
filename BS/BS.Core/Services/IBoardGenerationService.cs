@@ -3,7 +3,7 @@ using FluentResults;
 
 namespace BS.Core.Services;
 
-public interface IBoardService
+public interface IBoardGenerationService
 {
     public Result<GameBoard> InitializeBoard(int size);
 }

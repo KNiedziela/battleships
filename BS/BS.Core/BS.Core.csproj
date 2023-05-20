@@ -8,12 +8,12 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentResults" Version="3.15.2" />
+    <PackageReference Include="GeometRi" Version="1.4.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

@@ -4,16 +4,12 @@ namespace BS.Core.Entities.Ships;
 
 public class Destroyer : Ship
 {
-    private const int ShipLength = 4;
-
-    public static Destroyer Create(Coordinates startCoordinates, bool isHorizontal)
+    public static Destroyer Create()
     {
         var ship = new Destroyer
         {
-            HitPoints = ShipLength,
+            HitPoints = 4,
             ShipType = ShipType.Destroyer,
-            StartCoordinates = startCoordinates,
-            EndCoordinates = startCoordinates.GetShipEndCoordinates(isHorizontal, ShipLength)
         };
 
         return ship;

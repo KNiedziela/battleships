@@ -1,4 +1,5 @@
-﻿using BS.Core.Entities.Ships;
+﻿using BS.Core.Entities;
+using BS.Core.Entities.Ships;
 using BS.Core.Helpers;
 using BS.Core.Models;
 using BS.Core.Repositories;
@@ -19,9 +20,9 @@ public class GameplayService : IGameplayService
         _shipFactory = shipFactory;
     }
 
-    public Result StartGame(Dictionary<ShipType, int> ships)
+    public Result StartGame(int boardSize, Dictionary<ShipType, int> ships)
     {
-        var newBoardResult = _boardGenerationService.InitializeBoard(10);
+        var newBoardResult = _boardGenerationService.InitializeBoard(boardSize);
         if (newBoardResult.IsFailed)
         {
             return Result.Fail(newBoardResult.Errors);
@@ -94,5 +95,27 @@ public class GameplayService : IGameplayService
         var shipsAlive = board.Ships.Where(s => s.IsAlive).ToList();
 
         return Result.Ok(shipsAlive);
+    }
+
+    public Result<List<ShotHistory>> GetShotsHistory()
+    {
+        var boardResult = _boardRepository.GetGameBoard();
+        if (boardResult.IsFailed)
+        {
+            return Result.Fail(boardResult.Errors);
+        }
+        var board = boardResult.Value;
+        return board.ShotsHistory;
+    }
+
+    public Result<bool> IsGameFinished()
+    {
+        var boardResult = _boardRepository.GetGameBoard();
+        if (boardResult.IsFailed)
+        {
+            return Result.Fail(boardResult.Errors);
+        }
+        var board = boardResult.Value;
+        return board.AllShipsDefeated();
     }
 }

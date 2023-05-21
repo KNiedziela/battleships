@@ -22,5 +22,11 @@ public static class ShipBuilder
 
         return entity;
     }
+    public static Ship WithHitPoints(this Ship entity, int amount)
+    {
+        entity.HitPoints = amount;
+
+        return entity;
+    }
 
 }

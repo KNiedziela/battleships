@@ -1,11 +1,9 @@
 using BS.Common.Builders.Builders;
 using BS.Core.Entities;
-using BS.Core.Entities.Ships;
 using BS.Core.Models;
 using BS.Core.Repositories;
 using BS.Core.Services;
 using BS.IntegrationTest.Helpers;
-using FluentAssertions;
 using FluentResults.Extensions.FluentAssertions;
 
 namespace BS.IntegrationTest.Tests
@@ -14,11 +12,6 @@ namespace BS.IntegrationTest.Tests
     {
         private IGameplayService _service;
         private IBoardRepository _repository;
-        private readonly Dictionary<ShipType, int> _ships = new()
-        {
-            { ShipType.Battleship,1},
-            { ShipType.Destroyer,2},
-        };
 
         [SetUp]
         public void Setup()

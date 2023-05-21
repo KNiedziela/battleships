@@ -15,6 +15,8 @@ namespace BS.IntegrationTest.Tests
             { ShipType.Destroyer,2},
         };
 
+        private const int BoardSize = 10;
+
         [SetUp]
         public void Setup()
         {
@@ -24,14 +26,14 @@ namespace BS.IntegrationTest.Tests
         [Test]
         public void When_starting_game_it_should_be__success()
         {
-            var result = _service.StartGame(_ships);
+            var result = _service.StartGame(BoardSize, _ships);
 
             result.Should().BeSuccess();
         }
         [Test]
         public void When_starting_game_it_should_contain_correct_ship_amount()
         {
-            _service.StartGame(_ships);
+            _service.StartGame(BoardSize, _ships);
 
             var result = _service.GetAliveShips();
             result.Should().BeSuccess();

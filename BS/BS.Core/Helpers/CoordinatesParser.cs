@@ -13,8 +13,8 @@ public static class CoordinatesParser
                 $"{coordinates} are invalid coordinates, use correct ones, starting with a letter and ending with digits e.g. A5");
         }
 
-        var x = char.ToUpper(coordinates.First()) - 'A' + 1;
-        if (!int.TryParse(coordinates.Substring(1), out int y))
+        var y = char.ToUpper(coordinates.First()) - 'A' + 1;
+        if (!int.TryParse(coordinates.Substring(1), out int x))
         {
             return Result.Fail(
                 $"{coordinates} has an invalid number.");

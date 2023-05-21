@@ -24,17 +24,22 @@ public static class ShipCoordinatesExtensions
     }
     public static bool CheckIfShipsOverlap(Coordinates existingStartCoords, Coordinates existingEndCoords, Coordinates startCoords, Coordinates endCoords)
     {
-        var existing = new Line3d(existingStartCoords.ToPoint3D(), existingEndCoords.ToPoint3D());
-        var candidate = new Line3d(startCoords.ToPoint3D(), endCoords.ToPoint3D());
+        var existing = new Segment3d(existingStartCoords.ToPoint3D(), existingEndCoords.ToPoint3D());
+        var candidate = new Segment3d(startCoords.ToPoint3D(), endCoords.ToPoint3D());
         var isIntersecting = existing.IntersectionWith(candidate) is not null;
 
         return isIntersecting;
     }
 
     public static bool CheckIfShipsOverlap(Coordinates existingStartCoords, Coordinates existingEndCoords,
-        Coordinates coord) =>
-        CheckIfShipsOverlap(existingStartCoords, existingEndCoords, coord, coord
-             );
+        Coordinates coord)
+    {
+        var existing = new Segment3d(existingStartCoords.ToPoint3D(), existingEndCoords.ToPoint3D());
+        var candidate = coord.ToPoint3D();
+        var distance = existing.DistanceTo(candidate);
+
+        return distance == 0;
+    }
 
 
     public static Point3d ToPoint3D(this Coordinates coord) => new(coord.X, coord.Y, 0);

@@ -50,7 +50,7 @@ public class GameplayService : IGameplayService
         }
     }
 
-    public Result TakeShot(TakeShootInputModel inputModel)
+    public Result<bool> TakeShot(TakeShootInputModel inputModel)
     {
         var coordinatesResult = CoordinatesParser.ParseCoordinates(inputModel.TargetField);
         if (coordinatesResult.IsFailed)
@@ -71,18 +71,16 @@ public class GameplayService : IGameplayService
         }
 
         var aliveShip = board.GetAliveShips().FirstOrDefault(s => ShipCoordinatesExtensions.CheckIfShipsOverlap(s.StartCoordinates, s.EndCoordinates, coordinatesResult.Value));
-        if (aliveShip is not null)
-        {
-            board.AddShot(coordinatesResult.Value, true);
-            aliveShip.TakeDamage();
-        }
-        else
+        if (aliveShip is null)
         {
             board.AddShot(coordinatesResult.Value, false);
-
+            return Result.Ok(false);
         }
 
-        return Result.Ok();
+        board.AddShot(coordinatesResult.Value, true);
+        aliveShip.TakeDamage();
+
+        return Result.Ok(true);
     }
 
     public Result<List<Ship>> GetAliveShips()

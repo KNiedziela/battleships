@@ -7,6 +7,6 @@ namespace BS.Core.Services;
 public interface IGameplayService
 {
     public Result StartGame(Dictionary<ShipType, int> ships);
-    public Result TakeShot(TakeShootInputModel inputModel);
+    public Result<bool> TakeShot(TakeShootInputModel inputModel);
     public Result<List<Ship>> GetAliveShips();
 }

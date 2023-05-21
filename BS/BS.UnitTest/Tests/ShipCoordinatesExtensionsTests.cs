@@ -61,5 +61,26 @@ namespace BS.UnitTest.Tests
             // Assert
             return isOverlap;
         }
+
+        [TestCase(1, 1, 3, 1, 1, 2, ExpectedResult = false)]
+        [TestCase(3, 3, 5, 3, 3, 3,  ExpectedResult = true)]
+        [TestCase(5, 1, 5, 10, 5, 1,  ExpectedResult = true)]
+        [TestCase(1, 9, 10, 9, 1, 1,  ExpectedResult = false)]
+        public bool CheckIfPointOverlap_ReturnsExpectedResult(
+            int existingStartX, int existingStartY, int existingEndX, int existingEndY,
+            int pointX, int pointY)
+        {
+            // Arrange
+            var existingStartCoords = Coordinates.Create(existingStartX, existingStartY);
+            var existingEndCoords = Coordinates.Create(existingEndX, existingEndY);
+            var pointCoords = Coordinates.Create(pointX, pointY);
+
+            // Act
+            var isOverlap =
+                ShipCoordinatesExtensions.CheckIfShipsOverlap(existingStartCoords, existingEndCoords, pointCoords);
+
+            // Assert
+            return isOverlap;
+        }
     }
 }

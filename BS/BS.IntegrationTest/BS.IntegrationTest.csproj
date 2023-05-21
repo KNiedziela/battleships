@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BS.Core\BS.Core.csproj" />
+    <ProjectReference Include="..\BS.Test.Builders\BS.Common.Builders.csproj" />
   </ItemGroup>
 
   <ItemGroup>

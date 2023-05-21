@@ -20,7 +20,8 @@ namespace BS.UnitTest.Tests
         }
 
         [TestCase("A1", ExpectedResult = "1,1")]
-        [TestCase("F10", ExpectedResult = "6,10")]
+        [TestCase("A2", ExpectedResult = "2,1")]
+        [TestCase("C2", ExpectedResult = "2,3")]
         public string CoordinatesParser_ShouldReturnCorrectCoordinates(string coordinates)
         {
             // Act
